@@ -1,0 +1,6 @@
+framework module Pods_StadionMap {
+  umbrella header "Pods-StadionMap-umbrella.h"
+
+  export *
+  module * { export * }
+}
