@@ -18,28 +18,36 @@ class StadionTableViewController: UITableViewController {
     var negaraSelected:String?
     var eventSelected:String?
     
-    var arrRest = [[String : String]]()
-
+    var nampungId : String? = nil
+    var arrRest = [[String:String]]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let params = ["nama" : namaSelected]
+        let params = ["id_stadion" : nampungId]
         let url = "http://localhost/Data/index.php/api/getStadion"
-
-        Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseJSON(completionHandler: { (response) in
-            //check response
-            if response.result.isSuccess {
-                let json = JSON(response.result.value as Any)
-                print(json)
-                self.arrRest = json["List Stadion"].arrayObject as! [[String : String]]
+        
+        Alamofire.request(url, method: .post, parameters: params, encoding: URLEncoding.default, headers: nil).responseJSON(completionHandler:
+            { (response) in
                 
-                if(self.arrRest.count > 0){
-                    self.tableView.reloadData()
+                
+                if response.result.isSuccess {
+                    //kalau response suces kita ambil json
+                    let json = JSON(response.result.value as Any)
+                    print(json)
+                    //get jsonaray dari json arrayq
+                    self.arrRest = json["List Stadion"].arrayObject as! [[String : String]]
+                    //check d log
+                    //check jumlah array
+                    if (self.arrRest.count > 0){
+                        
+                        //refresh tableview
+                        self.tableView.reloadData()
+                    }
+                }else{
+                    print("Error Server")
                 }
-            }else{
-                print("Error Server")
-            }
         })
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,10 +71,10 @@ class StadionTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! StadionTableViewCell
 
-        var task = arrRest[indexPath.row]
+        var serverid = arrRest[indexPath.row]
         
-        let nama = task["nama"]
-        let lokasi = task["kota"]
+        let nama = serverid["nama"]
+        let lokasi = serverid["kota"]
        
         cell.lblNama.text = nama
         cell.lblLokasi.text = lokasi
@@ -79,11 +87,11 @@ class StadionTableViewController: UITableViewController {
         
         let task = arrRest[indexPath.row]
         
-        namaSelected = task["nama"]
-        kapasitasSelected = task["kapasitas"]
-        kotaSelected = task["kota"]
-        negaraSelected = task["negara"]
-        eventSelected = task["tuanRumah_event"]
+        namaSelected = task["nama"] as! String
+        kapasitasSelected = task["kapasitas"] as! String
+        kotaSelected = task["kota"] as! String
+        negaraSelected = task["negara"] as! String
+        eventSelected = task["tuanRumah_event"] as! String
 
         
         performSegue(withIdentifier: "passData", sender: self)
@@ -94,13 +102,13 @@ class StadionTableViewController: UITableViewController {
             
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let controller = segue.destination as! ViewController
-                let task = arrRest[indexPath.row]
+                let value = arrRest[indexPath.row]
                 
-                controller.passNama = task["nama"]
-                controller.passKapasitas = task["kapasitas"]
-                controller.passKota = task["kota"]
-                controller.passNegara = task["negara"]
-                controller.passEvent = task["tuanRumah_event"]
+                controller.passNama = value["nama"] as! String
+                controller.passKapasitas = value["kapasitas"] as! String
+                controller.passKota = value["kota"] as! String
+                controller.passNegara = value["negara"] as! String
+                controller.passEvent = value["tuanRumah_event"] as! String
             }
         }
     }

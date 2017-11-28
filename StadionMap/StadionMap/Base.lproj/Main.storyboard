@@ -24,7 +24,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Stadion Table View Controller-->
+        <!--List Stadion-->
         <scene sceneID="BQg-9j-lbp">
             <objects>
                 <tableViewController id="Uxc-O6-djg" customClass="StadionTableViewController" customModule="StadionMap" customModuleProvider="target" sceneMemberID="viewController">
@@ -32,12 +32,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="jMO-zI-Ybd">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="LIst Stadion" id="gPf-6G-V08"/>
+                            </items>
+                        </navigationBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="84" id="qRt-ds-IQB" customClass="StadionTableViewCell" customModule="StadionMap" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="84"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="84"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qRt-ds-IQB" id="poQ-60-n95">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="84"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="83.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nama stadion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mRt-gD-QZM">
@@ -76,6 +83,7 @@
                             <outlet property="delegate" destination="Uxc-O6-djg" id="vPL-5Q-vxh"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="List Stadion" image="clipboard" id="LVT-9c-2Ma"/>
                     <navigationItem key="navigationItem" id="DFa-fD-ZaO"/>
                     <connections>
                         <segue destination="DYI-gC-HGv" kind="modal" identifier="passData" id="ZPP-ys-jNs"/>
@@ -83,7 +91,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dsG-Lc-23i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2261.5999999999999" y="-482.60869565217394"/>
+            <point key="canvasLocation" x="1988" y="-482"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="I9C-gG-12b">
@@ -132,7 +140,13 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9o3-78-dvc">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
-                                    <navigationItem title="Detail" id="WCR-a4-WaT"/>
+                                    <navigationItem title="Detail" id="WCR-a4-WaT">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="qz2-qz-Nn8">
+                                            <connections>
+                                                <segue destination="xVR-y1-HQa" kind="modal" id="f2l-ZS-ftg"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lokasi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auz-mf-Ubi">
@@ -192,7 +206,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="z0H-iO-5LK" kind="relationship" relationship="viewControllers" id="MCm-Cg-42Q"/>
+                        <segue destination="Uxc-O6-djg" kind="relationship" relationship="viewControllers" id="n4c-D2-0hr"/>
                         <segue destination="T4h-yI-BVW" kind="relationship" relationship="viewControllers" id="grH-DF-suC"/>
                     </connections>
                 </tabBarController>
@@ -229,25 +243,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xzd-A7-q8S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1346.4000000000001" y="272.11394302848578"/>
-        </scene>
-        <!--List Stadion-->
-        <scene sceneID="4ZA-Xi-smf">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="z0H-iO-5LK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="List Stadion" image="clipboard" id="8jw-De-4iS"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Guc-v2-jeD">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Uxc-O6-djg" kind="relationship" relationship="rootViewController" id="rsh-uy-2jE"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8Jb-Cm-Tfb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1408" y="-468.66566716641682"/>
         </scene>
     </scenes>
     <resources>
